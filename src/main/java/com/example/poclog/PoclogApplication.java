@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
+import java.util.function.Predicate;
+
 @SpringBootApplication
 public class PoclogApplication {
 
@@ -16,6 +18,12 @@ public class PoclogApplication {
         filter.setIncludePayload(true);
         filter.setMaxPayloadLength(10000);
         filter.setIncludeHeaders(true);
+        filter.setHeaderPredicate(new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return s.equals("user-agent");
+            }
+        });
         filter.setAfterMessagePrefix("REQUEST DATA : ");
         return filter;
     }
