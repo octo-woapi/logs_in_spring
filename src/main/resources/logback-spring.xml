@@ -2,7 +2,7 @@
 <configuration>
 
     <property name="LOGS" value="./logs" />
-    <property name="LOG_PATTERN" value="%highlight(%-5level) from POC_LOG at %black(%d{ISO8601}) %blue(%C{1.}): %msg%n%throwable" />
+    <property name="LOG_PATTERN" value="%highlight(%-5level) from POC_LOG at %black(%d{ISO8601}) %blue(%C{1.}) %yellow(%X{trace_id}) : %msg%n%throwable" />
     <property name="APP_LOG_ROOT" value="/home/quen/work/projects/rexel/poclog" />
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
