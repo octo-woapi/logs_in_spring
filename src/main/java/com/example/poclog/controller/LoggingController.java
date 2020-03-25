@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
@@ -19,7 +20,8 @@ public class LoggingController {
     ClassA classA;
 
     @GetMapping("/")
-    public String displayBasicLogs(){
+
+    public String displayBasicLogs(@RequestAttribute(name = "password", required = false) String password){
         try {
             classA.methodA();
         } catch (InterruptedException e) {
@@ -28,4 +30,6 @@ public class LoggingController {
         }
         return "Done";
     }
+
+
 }
