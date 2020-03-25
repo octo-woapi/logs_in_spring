@@ -2,6 +2,7 @@ package com.example.poclog.controller;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,15 +15,17 @@ public class LoggingController {
 
     Logger logger = LoggerFactory.getLogger(LoggingController.class);
 
+    @Autowired
+    ClassA classA;
+
     @GetMapping("/")
     public String displayBasicLogs(){
-
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
-
-        return "Check my logs bro !";
+        try {
+            classA.methodA();
+        } catch (InterruptedException e) {
+            logger.error("something went wrong calling A");
+            e.printStackTrace();
+        }
+        return "Done";
     }
 }
